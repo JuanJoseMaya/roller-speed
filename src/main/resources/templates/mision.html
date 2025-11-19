@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Misión</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div th:replace="~{fragments/header :: navbar}"></div>
+    
+    <div class="container mt-5 mb-5">
+        <div class="card shadow-lg border-0 overflow-hidden">
+            <div class="row g-0">
+                <div class="col-md-8 p-5 bg-white">
+                    <h5 class="text-uppercase text-primary fw-bold mb-3">Nuestro Propósito</h5>
+                    <h2 class="display-4 fw-bold mb-4">Transformar Vidas</h2>
+                    <p class="lead text-dark" style="text-align: justify;">
+                        "La misión de <strong>Roller Speed</strong> va más allá de las medallas. Existimos para utilizar el patinaje como un vehículo de transformación social en Santa Marta."
+                    </p>
+                    <p class="text-muted" style="text-align: justify;">
+                        Nos comprometemos a formar seres humanos integrales, inculcando valores inquebrantables como la resiliencia y el respeto. Buscamos alejar a la juventud del ocio improductivo, brindándoles un entorno donde puedan soñar, esforzarse y alcanzar metas que nunca creyeron posibles. Cada niño en patines es un campeón de la vida en formación.
+                    </p>
+                </div>
+                <div class="col-md-4 bg-primary d-flex align-items-center justify-content-center p-4 text-white text-center">
+                    <div>
+                        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135706.png" width="150" class="mb-3 filter-white">
+                        <h4>Pasión con Propósito</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

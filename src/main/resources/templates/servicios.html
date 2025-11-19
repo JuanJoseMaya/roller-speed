@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Servicios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div th:replace="~{fragments/header :: navbar}"></div>
+
+    <div class="container mt-5 mb-5">
+        <div class="text-center mb-5">
+            <h2 class="display-4 fw-bold text-primary">Programas de Formación</h2>
+            <p class="lead text-muted">Elige el programa ideal para ti.</p>
+        </div>
+
+        <div class="row align-items-end">
+            <div class="col-lg-4 mb-4">
+                <div class="card shadow border-0 bg-white">
+                    <div class="card-header py-3 bg-white text-center">
+                        <h4 class="fw-bold text-secondary">Iniciación</h4>
+                    </div>
+                    <div class="card-body text-center">
+                        <h1 class="card-title pricing-card-title">$80.000<small class="text-muted fs-6">/mes</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4 text-start px-4">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Fundamentos básicos</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>2 Clases semanales</li>
+                        </ul>
+                        <a th:href="@{/registro(plan='iniciacion')}" class="btn btn-outline-primary w-100 rounded-pill">Empezar Aquí</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 mb-4">
+                <div class="card shadow-lg border-primary position-relative bg-white transform-scale">
+                    <span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-warning text-dark">POPULAR</span>
+                    <div class="card-header py-3 bg-primary text-white text-center">
+                        <h4 class="my-0 fw-bold">Intermedio</h4>
+                    </div>
+                    <div class="card-body text-center">
+                        <h1 class="card-title pricing-card-title">$120.000<small class="text-muted fs-6">/mes</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4 text-start px-4">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Técnica avanzada</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>3 Clases semanales</li>
+                        </ul>
+                        <a th:href="@{/registro(plan='intermedio')}" class="btn btn-primary w-100 btn-lg rounded-pill shadow">Inscribirse</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 mb-4">
+                <div class="card shadow border-0 bg-white">
+                    <div class="card-header py-3 bg-dark text-white text-center">
+                        <h4 class="fw-bold">Competición</h4>
+                    </div>
+                    <div class="card-body text-center">
+                        <h1 class="card-title pricing-card-title">$180.000<small class="text-muted fs-6">/mes</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4 text-start px-4">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Alto rendimiento</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>5 Clases semanales</li>
+                        </ul>
+                        <a th:href="@{/registro(plan='competicion')}" class="btn btn-outline-dark w-100 rounded-pill">Unirse</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

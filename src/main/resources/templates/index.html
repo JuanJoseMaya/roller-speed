@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Roller Speed</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .hero {
+            /* Fondo oscuro con imagen para resaltar el texto */
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://cdag.com.gt/wp-content/uploads/2024/10/53670196919_02edf2db70_k-1024x683.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 180px 0;
+        }
+        .card-hover:hover { transform: translateY(-10px); transition: 0.3s; box-shadow: 0 1rem 3rem rgba(0,0,0,.175)!important; }
+        .icon-circle { width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 2rem; }
+    </style>
+</head>
+<body class="bg-light">
+
+    <div th:replace="~{fragments/header :: navbar}"></div>
+
+    <div class="hero text-center">
+        <div class="container">
+            <h1 class="display-2 fw-bold mb-3">Desata tu Potencial Sobre Ruedas</h1>
+            <p class="lead mb-5 fs-4 text-white-50">En <strong>Roller Speed</strong> no solo enseñamos a patinar; forjamos carácter, disciplina y campeones para la vida en Santa Marta.</p>
+            <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+                <a class="btn btn-warning btn-lg px-5 py-3 fw-bold shadow" th:href="@{/registro}">¡Quiero Inscribirme!</a>
+                <a class="btn btn-outline-light btn-lg px-5 py-3 fw-bold" th:href="@{/servicios}">Conocer Programas</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h2 class="text-primary fw-bold display-5">Más que una Escuela, una Familia</h2>
+            <p class="text-muted fs-5">Descubre por qué somos la opción #1 para el desarrollo deportivo de tus hijos.</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card card-hover h-100 border-0 shadow-sm p-4 text-center bg-white">
+                    <div class="icon-circle bg-primary text-white"><i class="fas fa-medal"></i></div>
+                    <h3 class="h4 fw-bold">Excelencia Técnica</h3>
+                    <p class="text-muted">Metodología avalada por la Federación. Nuestros entrenadores corrigen cada detalle para asegurar una técnica impecable y evitar lesiones.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-hover h-100 border-0 shadow-sm p-4 text-center bg-white">
+                    <div class="icon-circle bg-success text-white"><i class="fas fa-heart"></i></div>
+                    <h3 class="h4 fw-bold">Pasión y Diversión</h3>
+                    <p class="text-muted">Creemos que se aprende mejor cuando se disfruta. Combinamos la exigencia deportiva con actividades lúdicas que enamoran a los niños del deporte.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-hover h-100 border-0 shadow-sm p-4 text-center bg-white">
+                    <div class="icon-circle bg-danger text-white"><i class="fas fa-shield-alt"></i></div>
+                    <h3 class="h4 fw-bold">Seguridad Total</h3>
+                    <p class="text-muted">Espacios adecuados, seguros de accidentes y supervisión constante. Tu tranquilidad y la integridad de nuestros deportistas es la prioridad.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

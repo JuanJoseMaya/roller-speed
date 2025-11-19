@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Clases</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <div th:replace="~{fragments/header :: navbar}"></div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow border-0">
+                    <div class="card-header bg-warning text-dark p-4">
+                        <h3 class="mb-0 fw-bold"><i class="fas fa-calendar-alt me-2"></i>Programación de Clases</h3>
+                    </div>
+                    <div class="card-body p-5">
+                        
+                        <form th:action="@{/clases/guardar}" th:object="${clase}" method="post">
+                            <input type="hidden" th:field="*{id}" />
+
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-8">
+                                    <label class="form-label fw-bold">Nombre de la Clase</label>
+                                    <input type="text" th:field="*{nombre}" class="form-control" placeholder="Ej: Técnica de Velocidad" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label fw-bold">Nivel</label>
+                                    <select class="form-select" th:field="*{nivel}" required>
+                                        <option value="Iniciación">Iniciación</option>
+                                        <option value="Intermedio">Intermedio</option>
+                                        <option value="Competición">Competición</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-4">
+                                    <label class="form-label fw-bold">Día</label>
+                                    <select class="form-select" th:field="*{diaSemana}" required>
+                                        <option value="Lunes">Lunes</option>
+                                        <option value="Martes">Martes</option>
+                                        <option value="Miércoles">Miércoles</option>
+                                        <option value="Jueves">Jueves</option>
+                                        <option value="Viernes">Viernes</option>
+                                        <option value="Sábado">Sábado</option>
+                                        <option value="Domingo">Domingo</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label fw-bold">Hora Inicio</label>
+                                    <input type="time" th:field="*{horaInicio}" class="form-control" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label fw-bold">Hora Fin</label>
+                                    <input type="time" th:field="*{horaFin}" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Instructor Asignado</label>
+                                <select class="form-select" th:field="*{instructor}" required>
+                                    <option value="" disabled selected>Seleccione un instructor...</option>
+                                    <!-- Aquí cargamos la lista de instructores desde la BD -->
+                                    <option th:each="profe : ${instructores}" 
+                                            th:value="${profe.id}" 
+                                            th:text="${profe.nombre} + ' ' + ${profe.apellido}">
+                                    </option>
+                                </select>
+                                <div class="form-text">Si la lista está vacía, registra primero un instructor.</div>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-lg">Guardar Programación</button>
+                                <a href="/clases/lista" class="btn btn-outline-secondary">Cancelar</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

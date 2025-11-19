@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Visión</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div th:replace="~{fragments/header :: navbar}"></div>
+
+    <div class="container mt-5 mb-5">
+        <div class="card shadow-lg border-0 overflow-hidden">
+            <div class="row g-0">
+                <div class="col-md-4 bg-dark d-flex align-items-center justify-content-center p-4 text-white text-center order-md-1">
+                    <div>
+                        <img src="https://cdn-icons-png.flaticon.com/512/2967/2967568.png" width="150" class="mb-3">
+                        <h4>Hacia el 2030</h4>
+                    </div>
+                </div>
+                <div class="col-md-8 p-5 bg-white order-md-2">
+                    <h5 class="text-uppercase text-primary fw-bold mb-3">Hacia Dónde Vamos</h5>
+                    <h2 class="display-4 fw-bold mb-4">Liderazgo Regional</h2>
+                    <p class="lead text-dark" style="text-align: justify;">
+                        "Para el año <strong>2030</strong>, Roller Speed será reconocida como la institución deportiva de referencia en todo el Caribe Colombiano."
+                    </p>
+                    <p class="text-muted" style="text-align: justify;">
+                        Visualizamos un futuro donde nuestros atletas nutran las selecciones nacionales, pero más importante aún, donde seamos un modelo de gestión deportiva sostenible. Aspiramos a tener nuestra propia pista de alto rendimiento y un programa de becas consolidado que garantice que ningún talento se pierda por falta de recursos. Queremos ser sinónimo de orgullo samario.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

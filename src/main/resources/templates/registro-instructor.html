@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Instructor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <div th:replace="~{fragments/header :: navbar}"></div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow border-0">
+                    <div class="card-header bg-dark text-white p-4">
+                        <h3 class="mb-0"><i class="fas fa-chalkboard-teacher me-2"></i>Gestión de Instructores</h3>
+                    </div>
+                    <div class="card-body p-5">
+                        
+                        <form th:action="@{/instructores/guardar}" th:object="${instructor}" method="post">
+                            <input type="hidden" th:field="*{id}" />
+
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Nombre</label>
+                                    <input type="text" th:field="*{nombre}" class="form-control" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Apellido</label>
+                                    <input type="text" th:field="*{apellido}" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Especialidad</label>
+                                    <select class="form-select" th:field="*{especialidad}" required>
+                                        <option value="" disabled selected>Seleccione...</option>
+                                        <option value="Iniciación">Iniciación Infantil</option>
+                                        <option value="Velocidad">Patinaje de Velocidad</option>
+                                        <option value="Artístico">Patinaje Artístico</option>
+                                        <option value="Hockey">Hockey en Línea</option>
+                                        <option value="Urbano">Patinaje Urbano/Slalom</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Años de Experiencia</label>
+                                    <input type="number" th:field="*{añosExperiencia}" class="form-control" min="0" required>
+                                </div>
+                            </div>
+
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Email</label>
+                                    <input type="email" th:field="*{email}" class="form-control" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Teléfono</label>
+                                    <input type="tel" th:field="*{telefono}" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-success btn-lg">Guardar Instructor</button>
+                                <a href="/instructores/lista" class="btn btn-outline-secondary">Cancelar</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

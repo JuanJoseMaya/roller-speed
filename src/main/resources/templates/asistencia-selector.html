@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Asistencia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <div th:replace="~{fragments/header :: navbar}"></div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow border-0">
+                    <div class="card-header bg-success text-white p-4">
+                        <h3 class="mb-0">✅ Registrar Asistencia</h3>
+                    </div>
+                    <div class="card-body p-5">
+                        <form action="/asistencia/guardar" method="post">
+                            
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Seleccionar Clase</label>
+                                <select name="claseId" class="form-select form-select-lg" required>
+                                    <option value="" disabled selected>Elige la clase...</option>
+                                    <option th:each="clase : ${clases}" 
+                                            th:value="${clase.id}" 
+                                            th:text="${clase.nombre} + ' (' + ${clase.diaSemana} + ')'"></option>
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">ID del Alumno</label>
+                                <input type="number" name="aspiranteId" class="form-control form-control-lg" placeholder="Escribe el ID del alumno" required>
+                                <div class="form-text">Mira el ID en el carnet o listado.</div>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-success btn-lg">Marcar Presente</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
