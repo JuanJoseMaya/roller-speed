@@ -2,7 +2,7 @@ package com.rollerspeed.rollerspeed.controller;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired; // Usamos el Servicio
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,120 +12,87 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.rollerspeed.rollerspeed.entity.Aspirante;
-import com.rollerspeed.rollerspeed.repository.AspiranteRepository;
+import com.rollerspeed.rollerspeed.service.IAspiranteService;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Controller
+@Tag(name = "Gestión de Aspirantes", description = "Controlador principal para registro y gestión")
 public class HomeController {
 
     @Autowired
-    private AspiranteRepository aspiranteRepository;
+    private IAspiranteService aspiranteService; // Inyección del Servicio
 
-    // ==========================================
-    // 1. PÁGINAS PÚBLICAS (ESTÁTICAS)
-    // ==========================================
+    // --- PÁGINAS PÚBLICAS ---
 
+    @Operation(summary = "Inicio", description = "Muestra la página de bienvenida")
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("titulo", "Inicio - Roller Speed");
         return "index";
     }
 
-    @GetMapping("/mision")
-    public String mision(Model model) {
-        model.addAttribute("titulo", "Nuestra Misión");
-        return "mision";
-    }
+    @GetMapping("/mision") public String mision(Model model) { model.addAttribute("titulo", "Misión"); return "mision"; }
+    @GetMapping("/vision") public String vision(Model model) { model.addAttribute("titulo", "Visión"); return "vision"; }
+    @GetMapping("/valores") public String valores(Model model) { model.addAttribute("titulo", "Valores"); return "valores"; }
+    @GetMapping("/servicios") public String servicios(Model model) { model.addAttribute("titulo", "Servicios"); return "servicios"; }
+    @GetMapping("/eventos") public String eventos(Model model) { model.addAttribute("titulo", "Eventos"); return "eventos"; }
+    @GetMapping("/login") public String login() { return "login"; }
 
-    @GetMapping("/vision")
-    public String vision(Model model) {
-        model.addAttribute("titulo", "Nuestra Visión");
-        return "vision";
-    }
+    // --- GESTIÓN DE ALUMNOS (CRUD) ---
 
-    @GetMapping("/valores")
-    public String valores(Model model) {
-        model.addAttribute("titulo", "Valores Corporativos");
-        return "valores";
-    }
-
-    @GetMapping("/servicios")
-    public String servicios(Model model) {
-        model.addAttribute("titulo", "Servicios de Patinaje");
-        return "servicios";
-    }
-
-    @GetMapping("/eventos")
-    public String eventos(Model model) {
-        model.addAttribute("titulo", "Próximos Eventos");
-        return "eventos";
-    }
-
-    // ==========================================
-    // 2. SEGURIDAD (LOGIN) - ¡NUEVO!
-    // ==========================================
-
-    @GetMapping("/login")
-    public String login() {
-        return "login"; // Retorna la vista login.html
-    }
-
-    // ==========================================
-    // 3. GESTIÓN DE ALUMNOS (CRUD COMPLETO)
-    // ==========================================
-
-    // A. CREAR
+    @Operation(summary = "Formulario Registro", description = "Muestra el formulario vacío o precargado")
     @GetMapping("/registro")
     public String mostrarRegistro(@RequestParam(name = "plan", required = false) String plan, Model model) {
         model.addAttribute("titulo", "Inscripción");
         Aspirante aspirante = new Aspirante();
-        if (plan != null) {
-            aspirante.setPlan(plan);
-        }
+        if (plan != null) aspirante.setPlan(plan);
         model.addAttribute("aspirante", aspirante);
         model.addAttribute("planSeleccionado", plan);
         return "registro";
     }
 
-    // B. EDITAR
+    @Operation(summary = "Editar Alumno", description = "Carga datos de un alumno existente")
     @GetMapping("/editar/{id}")
     public String editarAlumno(@PathVariable Long id, Model model) {
         model.addAttribute("titulo", "Editar Alumno");
-        Optional<Aspirante> aspiranteEncontrado = aspiranteRepository.findById(id);
-        
-        if (aspiranteEncontrado.isPresent()) {
-            model.addAttribute("aspirante", aspiranteEncontrado.get());
+        Optional<Aspirante> aspirante = aspiranteService.buscarPorId(id);
+
+        if (aspirante.isPresent()) {
+            model.addAttribute("aspirante", aspirante.get());
             return "registro"; 
         } else {
             return "redirect:/ver-inscritos";
         }
     }
 
-    // C. GUARDAR
+    @Operation(summary = "Guardar Alumno", description = "Guarda o actualiza un aspirante en la BD")
     @PostMapping("/guardar-aspirante")
     public String guardarAspirante(@ModelAttribute Aspirante aspirante) {
-        aspiranteRepository.save(aspirante);
+        aspiranteService.guardar(aspirante);
         return "redirect:/exito";
     }
 
-    // D. ÉXITO
     @GetMapping("/exito")
     public String mostrarExito(Model model) {
         model.addAttribute("titulo", "¡Registro Exitoso!");
         return "exito";
     }
 
-    // E. LEER (Protegido)
+    @Operation(summary = "Listar Alumnos", description = "Muestra la tabla de todos los inscritos")
     @GetMapping("/ver-inscritos")
     public String verInscritos(Model model) {
         model.addAttribute("titulo", "Listado de Alumnos");
-        model.addAttribute("aspirantes", aspiranteRepository.findAll());
+        model.addAttribute("aspirantes", aspiranteService.listarTodos());
         return "ver-inscritos";
     }
 
-    // F. ELIMINAR (Protegido)
+    @Operation(summary = "Eliminar Alumno", description = "Borra un aspirante por su ID")
     @GetMapping("/eliminar/{id}")
     public String eliminarAlumno(@PathVariable Long id) {
-        aspiranteRepository.deleteById(id);
+        aspiranteService.eliminar(id);
         return "redirect:/ver-inscritos";
     }
 }
+ 
